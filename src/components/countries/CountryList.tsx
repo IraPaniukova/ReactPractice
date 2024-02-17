@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { List, ListItem, ListItemText, Stack, Typography } from '@mui/material';
-
+import {alphabetical} from 'radash'
 
 //just testing accesability of the API
 interface Country {
@@ -22,8 +22,10 @@ const CountryList: React.FC = () => {
         const data: Country[] = response.data;
         const englishNames = data.filter((country: Country) => country.name.common);
         setCountries(englishNames);
-        setRegions(Array.from(new Set(data.map((country: Country) => country.region))));   
-      } catch (error) {
+        const allRegions = Array.from(new Set(data.map((country: Country) => country.region)));
+        const sortedRegions = alphabetical(allRegions,(r)=>r)
+        setRegions(sortedRegions);
+          } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
