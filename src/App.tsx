@@ -1,7 +1,7 @@
 import { Stack, Typography } from '@mui/material';
 import './App.css';
 import { Count } from './components/count/Count';
-import CountryList from './components/countries/CountryList';
+import { CountryList } from './components/countries/CountryList';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
           <Count />
         </Stack>
         <Stack >
-          <CountryList />
+          <CountryList/>
         </Stack>
       </Stack>
     </>
