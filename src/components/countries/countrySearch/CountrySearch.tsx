@@ -1,6 +1,7 @@
-import { InputAdornment, TextField } from '@mui/material';
+import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { useState } from 'react';
 import ManageSearchSharpIcon from '@mui/icons-material/ManageSearchSharp';
+import ClearIcon from '@mui/icons-material/Clear';
 
 interface CountrySearchProps {
   onChange?: (searchInput: string) => void;
@@ -13,6 +14,10 @@ export const CountrySearch = ({ onChange }: CountrySearchProps) => {
     onChange?.(e.target.value);
     setInput(userInput);
   };
+  const Clear = () => {
+    onChange?.('');
+    setInput('');
+  };
 
   return (
     <TextField
@@ -23,6 +28,21 @@ export const CountrySearch = ({ onChange }: CountrySearchProps) => {
         startAdornment: (
           <InputAdornment position="start">
             <ManageSearchSharpIcon />
+          </InputAdornment>
+        ),
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              sx={{
+                '&:hover': {
+                  bgcolor: 'transparent',
+                },
+              }}
+              onClick={Clear}
+              title="Clear" // Tooltip text for icon hover
+            >
+              <ClearIcon />
+            </IconButton>
           </InputAdornment>
         ),
       }}

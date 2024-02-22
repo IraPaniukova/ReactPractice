@@ -10,6 +10,8 @@ import { Typography } from '@mui/material';
 export const CountryPanel = () => {
   const [data, setData] = useState<Country[]>([]);
   const [search, setSearch] = useState('');
+  //   const [manuallyExpanded, setManuallyExpanded] = useState(false);
+  const SEARCH_STARTS_FROM = 2;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,11 +28,12 @@ export const CountryPanel = () => {
 
   const countries = data.filter((country: Country) => country.name.common);
 
-  const filteredCountries = search
-    ? countries.filter((country) =>
-        country.name.common.toLowerCase().includes(search.toLowerCase()),
-      )
-    : countries;
+  const filteredCountries =
+    search && search.length >= SEARCH_STARTS_FROM
+      ? countries.filter((country) =>
+          country.name.common.toLowerCase().includes(search.toLowerCase()),
+        )
+      : countries;
 
   const allRegions = Array.from(
     new Set(data.map((country: Country) => country.region)),
@@ -44,7 +47,11 @@ export const CountryPanel = () => {
     return alphabetical(counrties, (c) => c.name.common);
   };
   const isExpanded = (region: string) => {
-    if (search && groupedCountries(region).length > 0) {
+    if (
+      search &&
+      search.length >= SEARCH_STARTS_FROM &&
+      groupedCountries(region).length > 0
+    ) {
       return true;
     }
     return false;
