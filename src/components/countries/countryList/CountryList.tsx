@@ -1,20 +1,23 @@
 import { Accordion, AccordionDetails, AccordionSummary, Link, List, ListItem, ListItemText, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Country } from '../interface';
+// import { useState } from 'react';
 
 interface CountryListProps {
-  
   sortedRegions: string[];
   groupedCountries: (region: string) => Country[];
+  isExpanded: (region: string) => boolean;
 }
-
-export const CountryList: React.FC<CountryListProps> = ({ sortedRegions, groupedCountries}) => {
+export const CountryList: React.FC<CountryListProps> = ({ 
+  sortedRegions, groupedCountries,isExpanded}) => {
   const ACCORDION_HEIGHT = 200;
-
+ 
   return (
-   <>
-      {sortedRegions.map((region, index) => (
-        <Accordion key={index} >
+    <>
+      {sortedRegions.map((region, index) => (      
+        <Accordion key={index}
+        expanded={isExpanded(region)} 
+        >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1-content"
@@ -39,10 +42,9 @@ export const CountryList: React.FC<CountryListProps> = ({ sortedRegions, grouped
               ))}
             </List>
           </AccordionDetails>
-
         </Accordion>
       ))}
-      </>
+    </>
   );
 };
 

@@ -10,7 +10,7 @@ import { Typography } from "@mui/material";
 
 export const CountryPanel = () => {
     const [data, setData] = useState<Country[]>([]);
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,6 +37,11 @@ export const CountryPanel = () => {
         const counrties = filteredCountries.filter((country: Country) => country.region === region);
         return alphabetical(counrties, (c) => c.name.common);
     }
+    const isExpanded =(region: string)=>{
+        if(search && groupedCountries(region).length>0)
+        {return true}
+        return false;
+    }
 
     return (
         <Stack
@@ -48,10 +53,13 @@ export const CountryPanel = () => {
                 boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
                 width: '380px',
             }}>
-            <Typography variant='button'>Data from a public API (Countries)</Typography>
-
+            <Typography variant='button'>Countries (Data from a public API)</Typography>
             <CountrySearch onChange={setSearch} />
-            <CountryList sortedRegions={sortedRegions} groupedCountries={groupedCountries} />
+            <CountryList 
+                sortedRegions={sortedRegions} 
+                groupedCountries={groupedCountries} 
+                isExpanded ={isExpanded} 
+             />
         </Stack>
     )
 }
