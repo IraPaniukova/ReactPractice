@@ -1,4 +1,10 @@
-import { Button, IconButton, InputAdornment, Stack, Typography } from '@mui/material';
+import {
+  Button,
+  IconButton,
+  InputAdornment,
+  Stack,
+  Typography,
+} from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useState } from 'react';
 
@@ -8,10 +14,10 @@ export const Count = () => {
   const onClick = () => {
     setCount(count + 1);
   };
-  const Clear=(e: React.MouseEvent<HTMLButtonElement>)=>{
-    e.stopPropagation();  //when you click on cross it stops the onClick from happening
+  const Clear = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation(); //when you click on cross it stops the onClick from happening
     setCount(0);
-  }
+  };
   return (
     <Stack
       direction="row"
@@ -28,21 +34,22 @@ export const Count = () => {
       }}
     >
       <Typography variant="h6">Count clicks: </Typography>
-      <Button variant="contained" 
-        sx={{paddingRight: '0px'}} 
+      <Button
+        variant="contained"
+        sx={{ paddingRight: '0px' }}
         onClick={onClick}
         title="Click to count" // Tooltip text for  hover
-        >
+      >
         {count} clicks
         <InputAdornment position="end">
-           <IconButton 
-           sx={{color:'white'}} 
-           onClick={Clear}             
-           title="Clear" // Tooltip text for icon hover
-           >
-             <ClearIcon />
-           </IconButton>
-         </InputAdornment>
+          <IconButton
+            sx={{ color: 'white' }}
+            onClick={Clear}
+            title="Clear" // Tooltip text for icon hover
+          >
+            <ClearIcon />
+          </IconButton>
+        </InputAdornment>
       </Button>
     </Stack>
   );
