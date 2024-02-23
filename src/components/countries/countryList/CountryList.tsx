@@ -1,15 +1,19 @@
 import {
   Accordion,
   AccordionDetails,
-  AccordionSummary,
+  AccordionSummaryProps,
   Link,
   List,
   ListItem,
   ListItemText,
   Typography,
+  styled,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Country } from '../interface';
+import MuiAccordionSummary, {
+} from '@mui/material/AccordionSummary';
+
 
 interface CountryListProps {
   sortedRegions: string[];
@@ -27,7 +31,20 @@ export const CountryList: React.FC<CountryListProps> = ({
 }) => {
   const ACCORDION_HEIGHT = 200;
 
-  
+  const AccordionSummary = styled((props: AccordionSummaryProps) => (
+    <MuiAccordionSummary
+      {...props}
+    />
+  ))(({ theme }) => ({
+    backgroundColor:
+      theme.palette.mode === 'dark'
+        ? 'rgba(255, 255, 255, .05)'
+        : 'rgba(0, 0, 0, .03)',
+    // '& .MuiAccordionSummary-content': {
+    //   height: '100px', 
+    //   padding: theme.spacing(1), 
+    // },
+  }));
 
   return (
     <>

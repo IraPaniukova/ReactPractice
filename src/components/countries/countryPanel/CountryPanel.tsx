@@ -60,14 +60,15 @@ export const CountryPanel = () => {
   const [expandedState, setExpandedState] = useState<boolean[]>(
     Array(sortedRegions.length).fill(false),
   );
-  // Function to handle accordion toggle
+  // Function to handle accordion toggle when there is no search
   const accordionToggle = (index: number) => {
+    if(!search){
     setExpandedState((prevState) => {
       const newState = [...prevState];
       newState[index] = !newState[index];
       return newState;
     });
-  };
+}};
 
   return (
     <Stack
