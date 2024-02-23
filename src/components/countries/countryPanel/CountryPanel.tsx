@@ -10,7 +10,6 @@ import { Typography } from '@mui/material';
 export const CountryPanel = () => {
   const [data, setData] = useState<Country[]>([]);
   const [search, setSearch] = useState('');
-  //   const [manuallyExpanded, setManuallyExpanded] = useState(false);
   const SEARCH_STARTS_FROM = 2;
 
   useEffect(() => {
