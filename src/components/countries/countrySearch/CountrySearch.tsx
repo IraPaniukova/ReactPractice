@@ -5,8 +5,10 @@ import ClearIcon from '@mui/icons-material/Clear';
 
 interface CountrySearchProps {
   onChange?: (searchInput: string) => void;
+  setExpandedState: React.Dispatch<React.SetStateAction<boolean[]>>;
+  sortedRegions: string[];
 }
-export const CountrySearch = ({ onChange }: CountrySearchProps) => {
+export const CountrySearch = ({ onChange, setExpandedState, sortedRegions }: CountrySearchProps) => {
   const [input, setInput] = useState('');
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
@@ -17,6 +19,7 @@ export const CountrySearch = ({ onChange }: CountrySearchProps) => {
   const Clear = () => {
     onChange?.('');
     setInput('');
+    setExpandedState(Array(sortedRegions.length).fill(false));
   };
 
   return (

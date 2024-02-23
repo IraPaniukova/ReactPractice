@@ -45,6 +45,7 @@ export const CountryPanel = () => {
     );
     return alphabetical(counrties, (c) => c.name.common);
   };
+  
   const isExpanded = (region: string) => {
     if (
       search &&
@@ -54,6 +55,18 @@ export const CountryPanel = () => {
       return true;
     }
     return false;
+  };
+
+  const [expandedState, setExpandedState] = useState<boolean[]>(
+    Array(sortedRegions.length).fill(false),
+  );
+  // Function to handle accordion toggle
+  const accordionToggle = (index: number) => {
+    setExpandedState((prevState) => {
+      const newState = [...prevState];
+      newState[index] = !newState[index];
+      return newState;
+    });
   };
 
   return (
@@ -70,11 +83,13 @@ export const CountryPanel = () => {
       <Typography variant="button">
         Countries (Data from a public API)
       </Typography>
-      <CountrySearch onChange={setSearch} />
+      <CountrySearch onChange={setSearch} setExpandedState={setExpandedState}  sortedRegions={sortedRegions}/> 
       <CountryList
         sortedRegions={sortedRegions}
         groupedCountries={groupedCountries}
         isExpanded={isExpanded}
+        expandedState={expandedState}
+        accordionToggle={accordionToggle}
       />
     </Stack>
   );

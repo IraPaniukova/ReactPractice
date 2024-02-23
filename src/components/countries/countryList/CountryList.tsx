@@ -10,32 +10,24 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Country } from '../interface';
-import { useState } from 'react';
 
 interface CountryListProps {
   sortedRegions: string[];
   groupedCountries: (region: string) => Country[];
   isExpanded: (region: string) => boolean;
+  expandedState: boolean[]; 
+  accordionToggle: (index: number) => void; 
 }
 export const CountryList: React.FC<CountryListProps> = ({
   sortedRegions,
   groupedCountries,
   isExpanded,
+  expandedState,
+  accordionToggle
 }) => {
   const ACCORDION_HEIGHT = 200;
 
-  const [expandedState, setExpandedState] = useState<boolean[]>(
-    Array(sortedRegions.length).fill(false),
-  );
-
-  // Function to handle accordion toggle
-  const accordionToggle = (index: number) => {
-    setExpandedState((prevState) => {
-      const newState = [...prevState];
-      newState[index] = !newState[index];
-      return newState;
-    });
-  };
+  
 
   return (
     <>
